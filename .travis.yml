@@ -10,8 +10,7 @@ before_install:
 script:
   - docker run -e CI=true drout/docker-react npm run test
 
-#This section is to configure Travis CI to automatically deploy our project to..
-#..AWS once our tests have successfully passed.
+#This section is to configure Travis CI to automatically deploy our project to AWS once our tests have successfully passed.
 
 #deploy:
 # provider: elasticbeanstalk
