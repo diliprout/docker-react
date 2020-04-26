@@ -1,4 +1,5 @@
 language: generic
+#This section handles the image build, run and test of our project.
 sudo: required
 services:
   - docker
@@ -8,3 +9,19 @@ before_install:
 
 script:
   - docker run -e CI=true drout/docker-react npm run test
+
+#This section is to configure Travis CI to automatically deploy our project to..
+#..AWS once our tests have successfully passed.
+
+#deploy:
+# provider: elasticbeanstalk
+# region: #It is the region where the EBS instance was created. Can be found in the URL that will be created after we create the EBS instance for our project in AWS.
+# app: #Same as the project name provided in AWS
+# env: #The actual app running is not considered as an app but as an environment. It is the name we will find under All Application-->App Name-->Environment
+# bucket_name: #Its the location where Travis CI uploads the zip file(created by Travis CI by zipping all the files in our project) on AWS. This location is S3 bucket which is essentially a hard drive running on AWS. The S3 location name can be found by searching for S3. From the list of options, look for the one having name which includes the region name (mentioned above in the config).
+# bucket_path: #Its the app name provided above.
+# on: #This is to inform Travis to deploy the code to AWS only when there is a merge in master branch.
+#   branch: master
+# access_key_id: #Genrated in AWS and usally not provided here. Instead encrypt it in Travis CI and provide only the name of the encryption.
+# secret_access_key:
+#   secure: #Genrated in AWS and usally not provided here. Instead encrypt it in Travis CI and provide only the name of the encryption.
